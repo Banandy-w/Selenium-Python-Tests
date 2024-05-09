@@ -5,12 +5,17 @@
 # Enter login info
 # Verify user is logged in
 # Expected Results user is logged in
-import time
+import time, os
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+load_dotenv()
+userName = os.getenv("USER")
+password = os.getenv("PASSWORD")
 
 # Step 1 Navigate to tracker.gg
 ## We can definitely just open the login page directly but I want to explore the navigation functionality of selenium
@@ -33,8 +38,6 @@ print("Waiting for page to load")
 element_login = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.trn-input:nth-child(1)")))
 print('Scanning for username element')
 
-userName = 'bananatest'
-password = ''
 # Step 4 Entering login data
 # Need to wait for cloudflare to finish loading before we can enter the information
 # Using sleep probably isn't a good method in terms of automation. Other methods are more involved that seems be used for data scraping / beyond scope of this.
