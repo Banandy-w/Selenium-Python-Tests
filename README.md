@@ -1,5 +1,5 @@
 # Selenium-Python-Tests
-Writing automation tests for fun on Selenium with Python
+Using Selenium to learn automation coding practices by writing test cases.
 
 ## Requirements / Prereqs
 * [Mozilla browser](https://www.mozilla.org/en-US/firefox/new/)
