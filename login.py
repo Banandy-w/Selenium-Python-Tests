@@ -26,9 +26,8 @@ driver.get('https://tracker.gg/')
 
 
 # Step 2 Select login and click on it
-# Note to self: learn if By.NAME XPATH etc which is best by convention. Initial assumption would be by name but this element didn't have name
 print('Scanning for login element')
-element = driver.find_element(By.XPATH,'/html/body/div/div/nav/div[3]/a[2]')
+element = driver.find_element(By.CSS_SELECTOR,'.trn-game-bar-auth')
 element.send_keys(Keys.RETURN)
 
 
@@ -64,3 +63,4 @@ except NoSuchElementException:
 else:
     print('Success! Signed in. Browser will now close in 5s')
     time.sleep(5)
+    driver.quit()
