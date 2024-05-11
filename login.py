@@ -48,7 +48,9 @@ time.sleep(2)
 
 print('Entering Username and Password')
 element.send_keys(userName)
-element = driver.find_element(By.CSS_SELECTOR,'input.trn-input:nth-child(2)').send_keys(password,Keys.RETURN)
+#element = driver.find_element(By.CSS_SELECTOR,'input.trn-input:nth-child(2)').send_keys(password,Keys.RETURN)
+element = driver.find_element(By.CSS_SELECTOR,'input.trn-input:nth-child(2)').send_keys(password)
+element = driver.find_element(By.CSS_SELECTOR,"button.trn-button").click()
 
 # Step 5 Verify login was successful
 # Verify by checking user icon element
