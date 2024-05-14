@@ -1,6 +1,7 @@
 
 from selenium.webdriver.common.by import By
 
+
 class LoginPage:
     
     def __init__(self, driver):
@@ -10,4 +11,4 @@ class LoginPage:
         self.login_button = (By.CSS_SELECTOR,"button.trn-button")
 
     def input_username(self,username):
-        self.driver.find_element()
+        self.driver.find_element(self.username_textbox).send_keys(username)
