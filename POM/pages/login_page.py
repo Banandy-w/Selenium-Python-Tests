@@ -1,6 +1,6 @@
 
 from selenium.webdriver.common.by import By
-
+from locators import LoginPageLocators as Locator
 
 class LoginPage:
     
@@ -11,10 +11,10 @@ class LoginPage:
         self.login_button = (By.CSS_SELECTOR,"button.trn-button")
 
     def input_username(self,username):
-        self.driver.find_element(*self.username_textbox).send_keys(username)
+        self.driver.find_element(*Locator.USERNAME_TEXTBOX).send_keys(username)
     
     def input_password(self,password):
-        self.driver.find_element(*self.password_textbox).send_keys(password)
+        self.driver.find_element(*Locator.PASSWORD_TEXTBOX).send_keys(password)
 
     def click_login(self):
-        self.driver.find_element(*self.login_button).click()
+        self.driver.find_element(*Locator.LOGIN_BUTTON).click()
