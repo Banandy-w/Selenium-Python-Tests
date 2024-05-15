@@ -1,11 +1,9 @@
 
 from selenium.webdriver.common.by import By
-from locators import LoginPageLocators as Locator
+from POM.pages.locators import LoginPageLocators as Locator
+from POM.pages.home_page import BasePage
 
-class LoginPage:
-    
-    def __init__(self, driver):
-        self.driver = driver
+class LoginPage(BasePage):
 
     def input_username(self,username):
         self.driver.find_element(*Locator.USERNAME_TEXTBOX).send_keys(username)
