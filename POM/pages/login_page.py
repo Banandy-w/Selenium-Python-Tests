@@ -1,7 +1,7 @@
 
 from selenium.webdriver.common.by import By
 from POM.pages.locators import LoginPageLocators as Locator
-from POM.pages.home_page import BasePage
+from POM.pages.base_page import BasePage
 
 class LoginPage(BasePage):
 
