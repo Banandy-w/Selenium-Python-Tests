@@ -25,23 +25,21 @@ password = os.getenv("PASSWORD")
 ## We can definitely just open the login page directly but I want to explore the navigation functionality of selenium
 print('Openning firefox on page tracker.gg')
 driver = webdriver.Firefox()
-##driver.get('https://tracker.gg/')
-
 loginPage = LoginPage(driver)
 loginPage.open_page('https://tracker.gg/')
 
-# Step 2 Select login and click on it
+
+# Step 2 Navigate to login page by selecting login and click on it
 print('Scanning for login element')
 loginPage.click_on(HPL.SIGN_IN_ICON)
 
 
 # Driver doesn't wait for page to load so need to learn how to wait until element appears
 # Step 3 Wait for page to load
-wait = WebDriverWait(driver, 15)
+##
 print("Waiting for page to load")
-element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.trn-input:nth-child(1)")))
-
-##loginPage = LoginPage(driver)
+##element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.trn-input:nth-child(1)")))
+loginPage.wait_for(LPL.USERNAME_TEXTBOX)
 
 # Step 4 Entering login data
 # Need to wait for cloudflare to finish loading before we can enter the information

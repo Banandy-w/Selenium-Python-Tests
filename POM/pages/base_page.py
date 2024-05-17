@@ -21,3 +21,7 @@ class BasePage():
     """Clicks on given elment locator"""
     def click_on(self, by_locator):
         self.wait.until(EC.element_to_be_clickable(by_locator)).click()
+
+    """Waits for page to load a certain element"""
+    def wait_for(self,by_locator):
+        self.wait.until(EC.presence_of_element_located(by_locator))

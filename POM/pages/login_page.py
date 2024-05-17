@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from POM.pages.locators import LoginPageLocators as Locator
 from POM.pages.base_page import BasePage
 
-class LoginPage(BasePage):
+class LoginPage(BasePage, Locator):
 
     def __init__(self,driver):
         super().__init__(driver)
