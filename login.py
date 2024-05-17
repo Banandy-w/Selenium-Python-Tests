@@ -14,7 +14,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from POM.pages.login_page import LoginPage
-from POM.pages.locators import LoginPageLocators as LC
+from POM.pages.locators import LoginPageLocators as LPL
+from POM.pages.locators import HomePageLocators as HPL
 
 load_dotenv()
 userName = os.getenv("USER")
@@ -31,8 +32,7 @@ loginPage.open_page('https://tracker.gg/')
 
 # Step 2 Select login and click on it
 print('Scanning for login element')
-element = driver.find_element(By.CSS_SELECTOR,'.trn-game-bar-auth')
-element.send_keys(Keys.RETURN)
+loginPage.click_on(HPL.SIGN_IN_ICON)
 
 
 # Driver doesn't wait for page to load so need to learn how to wait until element appears
@@ -62,7 +62,7 @@ loginPage.click_login()
 # Note to self: maybe a more surefire way maybe would be to use cookies. 
 try:
     print('Verifying we are logged in...')
-    loginPage.is_visible(LC.USER_ICON)
+    loginPage.is_visible(LPL.USER_ICON)
 except TimeoutException:
     print('Test failed due to timeout. Likely due to cloudflare')
 except NoSuchElementException:
