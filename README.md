@@ -24,8 +24,9 @@ https://github.com/theskumar/python-dotenv
 - [x] Script that logs user into to tracker.gg from home page to sign in is complete.
 - [x] Code doesn't look scaleable so I need a better model. Introducing the Page Object Model (POM), I started implementing login_page.py as a starter
 - [x] Implement a POM for a class file of locators
-- [ ] Implement a POM for a class file of homepage and page functions
+- [x] Implement a POM for a class file of homepage and page functions
 - [ ] Implement a POM for get set elements
+- [ ] Implement pytest
 - [ ] Rewrite login.py as a test_login.py which will use pytest and POM framework to write cleaner readable test case
 - [ ] Write a few more variety of login tests
 - [ ] Explore search testing, likely need to expand POM
