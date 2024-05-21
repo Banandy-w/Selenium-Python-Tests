@@ -9,3 +9,4 @@ class LoginPageLocators():
 
 class HomePageLocators():
     SIGN_IN_ICON = (By.CSS_SELECTOR,'.trn-game-bar-auth')
+    BASE_URL = 'https://tracker.gg/'
