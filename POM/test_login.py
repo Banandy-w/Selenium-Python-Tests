@@ -1,8 +1,6 @@
 import pytest
 from POM.pages.login_page import LoginPage
 from POM.pages.locators import LoginPageLocators as LPL
-from POM.pages.locators import HomePageLocators as HPL
-
 
 class Test_Login():
 
