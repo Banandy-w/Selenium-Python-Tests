@@ -26,8 +26,8 @@ https://github.com/theskumar/python-dotenv
 - [x] Implement a POM for a class file of locators
 - [x] Implement a POM for a class file of homepage and page functions
 - [ ] Implement a POM for get set elements
-- [ ] Implement pytest
-- [ ] Rewrite login.py as a test_login.py which will use pytest and POM framework to write cleaner readable test case
+- [x] Implement pytest
+- [x] Rewrite login.py as a test_login.py which will use pytest and POM framework to write cleaner readable test case
 - [ ] Write a few more variety of login tests
 - [ ] Explore search testing, likely need to expand POM
 
