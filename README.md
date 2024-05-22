@@ -1,6 +1,6 @@
 # Selenium-Python-Tests
 Using Selenium to learn automation coding practices by writing test cases. *This an overview of the journey.*
-* First I needed a functioning product with data that I am personally interested so its more interesting. Naturally gravitated towards gaming so I chose https://tracker.gg/
+* First I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose https://tracker.gg/
 * Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. With this created [manual_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) (was login.py) which uses selenium at its core to navigate the website and login.
 * Some rodebumps, preserving our data privacy was solved by using [dotenv](https://github.com/theskumar/python-dotenv) and cloudflare was worked around using time.sleep()
 
