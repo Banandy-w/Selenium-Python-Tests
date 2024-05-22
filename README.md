@@ -7,11 +7,10 @@ Using Selenium to learn automation coding practices by writing test cases. *This
 Writing more tests in a scaleable fashion required the implementation of a [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models) which lead to the creation of the following:
 * [base_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/base_page.py) which should have some basic functions of navigating a webpage
 * [locators.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/locators.py) has locators of all necessary elements for testing
-* And [login_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py) which encapsulates functions of the login page into methods. </br>
-</br>
+* And [login_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py) which encapsulates functions of the login page into methods. 
+
 In hindsight, it might've been easier to put the locator variables into the login_page and base_page as it might've made the code a bit cleaner with less imports. But if this was to scale more features having locators in a seperate file maybe cleaner. This is something i'll see when trying to test a different feature.
-</br>
-</br>
+
 Next, to make sure the POM implementation was working correctly, I incrementally replaced functions from [manual_login](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) which lead to [login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/login.py) After verifying the POM implementation works,  we just needed to implement the testing in pytest.
 
 # Installation to try the code
