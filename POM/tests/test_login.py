@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from POM.pages.login_page import LoginPage
 from POM.pages.locators import LoginPageLocators as LoginLocator
 
+"""Loading Environment variables"""
 load_dotenv()
 userName = os.getenv('USER')
 password = os.getenv('PASSWORD')
@@ -16,14 +17,15 @@ class Test_Login():
         self.loginPage = LoginPage(self.driver)
         print('Test Login Driver setup complete')
 
-    
+    """Checking that Page is loaded"""
     def test_login_01_isVisible(self):
         print('Test Login_01 Page is Visible starting')
         assert self.loginPage.is_visible(LoginLocator.LOGIN_BUTTON)
         print('Test Login_01 Page is Visible completed')
 
+    """Basic tests for login success"""
     def test_login_02_success(self):
-        print('Test Login_02 success is starting')
+        print('Test Login_02_success is starting')
 
         print('Waiting for cloudflare to load')
         time.sleep(2)
@@ -36,6 +38,6 @@ class Test_Login():
         self.loginPage.click_login()
         assert self.loginPage.is_visible(LoginLocator.USER_ICON)
         print('Verifying user is logged in')
-        print('Test Login_02 Success completed')
+        print('Test Login_02_success completed')
     
 
