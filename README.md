@@ -9,7 +9,7 @@ Writing more tests in a scaleable fashion required the implementation of a [page
 * [locators.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/locators.py) has locators of all necessary elements for testing
 * And [login_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py) which encapsulates functions of the login page into methods. 
 
-In hindsight, it might've been easier to put the locator variables into the login_page and base_page as it might've made the code a bit cleaner with less imports. But if this was to scale more features having locators in a seperate file maybe cleaner. This is something i'll see when trying to test a different feature.
+In hindsight, I liked the idea of having all the locators in one file/class but it might've been easier to put the locator variables into their respective classes as class variables. Definitely would be more read-able since it wouldn't need as much importing. I am imagining that when testing more features, it will be more readable to have all the locators in one file.
 
 Next, to make sure the POM implementation was working correctly, I incrementally replaced functions from [manual_login](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) which lead to [login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/login.py) After verifying the POM implementation works,  we just needed to implement the testing in pytest.
 
