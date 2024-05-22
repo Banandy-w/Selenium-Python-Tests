@@ -1,12 +1,19 @@
 import pytest, time, os
+from dotenv import load_dotenv
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from POM.pages.login_page import LoginPage
-from POM.pages.locators import LoginPageLocators as LPL
 from POM.pages.locators import HomePageLocators as HomePage
+
+"""Loading Environment Variables"""
+load_dotenv()
+FIREFOX_DRIVER_PATH = os.getenv('FIREFOX_DRIVER_PATH')
 
 """Starts web browser"""
 @pytest.fixture(scope='class')
 def init_driver():
+    service = FirefoxService(executable_path=FIREFOX_DRIVER_PATH)
+
     driver = webdriver.Firefox()
     driver.implicitly_wait(10)
     print("Driver started")
