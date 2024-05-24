@@ -5,14 +5,29 @@ Mainly this project is to get an understanding of automation to improve my skill
 In this project, I explore automation test case creation by first using a basicm but fundamental feature that will help enable learning the basics of selenium also. In this case I chose the login feature. By doing so I learn navigation and best practices for waiting and interacting with elements that have yet to be loaded. Ultimately, I want to create a test suite for more than one feature, so the design pattern of a [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models)(POM) was needed to write tests in a sustainable and scalable fashion. Hopefully when the POM is implemented, writing test cases/suites in pytest should become a simple matter.
 
 ## Journey Overview WIP
-First I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose <https://tracker.gg/> which is a website that tracks performance across various competitive online games. Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. 
+
+I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose <https://tracker.gg/> which is a website that tracks performance across various competitive online games. Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. 
 <details>
   <summary>Here's our first basic iteration of logging in with selenium with <a href="https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py"> manual_login.py</a></summary>
   <br>
   
   
   ```python
-  # Step 1 Navigate to tracker.gg
+
+import time, os
+from dotenv import load_dotenv
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
+
+load_dotenv()
+userName = os.getenv("USER")
+password = os.getenv("PASSWORD")
+
+# Step 1 Navigate to tracker.gg
 ## We can definitely just open the login page directly but I want to explore the navigation functionality of selenium
 print('Openning firefox on page tracker.gg')
 driver = webdriver.Firefox()
@@ -63,12 +78,69 @@ else:
 
 Some rodebumps, preserving our data privacy was solved by using [dotenv](https://github.com/theskumar/python-dotenv) and cloudflare was worked around using time.sleep()
 
-Writing more tests in a scaleable fashion required the implementation of a POM or [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models) which lead to the creation of the following:
-* [base_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/base_page.py) which should have some basic functions of navigating a webpage
-* [locators.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/locators.py) has locators of all necessary elements for testing
-* And [login_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py) which encapsulates functions of the login page into methods. 
+### POM Implementation
+Writing more tests in a scaleable fashion required the implementation of a POM or [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models). We only need to implement what's needed for our tests to function
+which lead to the creation of the following:
+<details>
+  <summary>A <a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/base_page.py>base_page.py</a> that holds the basic functionality of the web page. All other pages should inherit from this class.</summary>
+  <br>
+  
+  ```python
+  
+    from selenium.webdriver.support.wait import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    
+    class BasePage():        
+        def __init__(self, driver):
+            self.driver = driver
+            self.wait = WebDriverWait(self.driver, 10)
+    
+        """Returns True if an elment is visible"""
+        def is_visible(self, by_locator):
+            element = self.wait.until(EC.visibility_of_element_located(by_locator))
+            return bool(element)
+        
+        """Opens URL"""
+        def open_page(self, URL):
+            self.driver.get(URL)
+  
+        """Clicks on given elment locator"""
+        def click_on(self, by_locator):
+            self.wait.until(EC.element_to_be_clickable(by_locator)).click()
 
-In hindsight, I liked the idea of having all the locators in one file/class but it might've been easier to put the locator variables into their respective classes as class variables. Definitely would be more read-able since it wouldn't need as much importing. I am imagining that when testing more features, it will be more readable to have all the locators in one file.
+        """Waits for page to load a certain element"""
+        def wait_for(self,by_locator):
+            self.wait.until(EC.presence_of_element_located(by_locator))
+
+        
+  ```
+</details>
+
+Our locators are all *located* heh, in this file:
+<details>
+  <summary><a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py>locators.py</a></summary>
+  <br>
+  
+  ```python
+from selenium.webdriver.common.by import By
+
+"""Holds static data of locators necessary for testing"""
+class LoginPageLocators():
+    USERNAME_TEXTBOX = (By.CSS_SELECTOR, "input.trn-input:nth-child(1)")
+    PASSWORD_TEXTBOX = (By.CSS_SELECTOR,'input.trn-input:nth-child(2)')
+    LOGIN_BUTTON = (By.CSS_SELECTOR,"button.trn-button")
+    USER_ICON = (By.CLASS_NAME, 'trn-game-bar-user')
+
+class HomePageLocators():
+    SIGN_IN_ICON = (By.CSS_SELECTOR,'.trn-game-bar-auth')
+    BASE_URL = 'https://tracker.gg/'
+        
+  ```
+</details>
+
+* And [login_page.py]() which encapsulates functions of the login page into methods. 
+
+
 
 Next, to make sure the POM implementation was working correctly, I incrementally replaced functions from [manual_login](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) which lead to [login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/login.py) After verifying the POM implementation works,  we just needed to implement the testing in pytest.
 * Now for pytest we have the [conftest.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/conftest.py) which has the code to set up pre-reqs in testing and [test_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py) that will test everything related to login.
@@ -76,7 +148,11 @@ Next, to make sure the POM implementation was working correctly, I incrementally
 
 Lastly is to write more tests for login and different features to and watch the POM scale
 
+### Pytest
+
 # Conclusions
+In hindsight, I liked the idea of having all the locators in one file/class but it might've been easier to put the locator variables into their respective classes as class variables. Definitely would be more read-able since it wouldn't need as much importing. I am imagining that when testing more features, it will be more readable to have all the locators in one file.
+
 # Next Steps
 - [ ] Write more test cases that attack the login feature differently.
 - [ ] Expand POM for another slightly more complicated feature that should also expand our understanding of Selenium. Likely considering Search
