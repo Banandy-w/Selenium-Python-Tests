@@ -5,7 +5,7 @@ Mainly this project is to get an understanding of automation to improve my skill
 * Choose a program/website that has dataset that wont be unintersting to me as a person to keep the project fun
 * Create a test case for a fundamental feature
 * Create small test suite of a couple different features
-* Gain an understanding of coding practices for automation, in this case selenium python.
+* Gain an understanding of coding practices for automation, in this case using selenium python.
 
 ## Journey Overview
 First I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose https://tracker.gg/. Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. With this created [manual_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) (was login.py) which uses selenium at its core to navigate the website and login.
@@ -79,6 +79,15 @@ pytest .\test_login.py
 - [ ] Explore search testing, likely need to expand POM
 
 ## References
+Documentation
+* https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/
+* https://selenium-python.readthedocs.io/
+* https://www.geeksforgeeks.org/selenium-python-introduction-and-installation/
+
+Youtube Tutorials
+* https://www.youtube.com/watch?v=P9ZWOWm7i0k
+* https://www.youtube.com/watch?v=0kHbK5iZkN0
+* https://www.youtube.com/watch?v=qBK5I_QApCg
 ## Conclusions
 ## Next Steps
 
