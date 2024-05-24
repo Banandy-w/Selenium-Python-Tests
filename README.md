@@ -1,10 +1,17 @@
-# Selenium-Python-Tests
-Using Selenium to learn automation coding practices by writing test cases. *This an overview of the journey.*
-* First I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose https://tracker.gg/
-* Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. With this created [manual_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) (was login.py) which uses selenium at its core to navigate the website and login.
+# Learning Automation with Selenium Python
+Mainly this project is to get an understanding of automation to improve my skillset as a QA Engineer
+
+## Goals
+* Choose a program/website that has dataset that wont be unintersting to me as a person to keep the project fun
+* Create a test case for a fundamental feature
+* Create small test suite of a couple different features
+* Gain an understanding of coding practices for automation, in this case selenium python.
+
+## Journey Overview
+First I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose https://tracker.gg/. Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. With this created [manual_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) (was login.py) which uses selenium at its core to navigate the website and login.
 * Some rodebumps, preserving our data privacy was solved by using [dotenv](https://github.com/theskumar/python-dotenv) and cloudflare was worked around using time.sleep()
 
-Writing more tests in a scaleable fashion required the implementation of a [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models) which lead to the creation of the following:
+Writing more tests in a scaleable fashion required the implementation of a POM or [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models) which lead to the creation of the following:
 * [base_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/base_page.py) which should have some basic functions of navigating a webpage
 * [locators.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/locators.py) has locators of all necessary elements for testing
 * And [login_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py) which encapsulates functions of the login page into methods. 
@@ -36,7 +43,7 @@ pip install pytest
 ## Setting up and trying the code
 1. Get the files
 ~~~
- git clone https://github.com/Banandy-w/Selenium-Python-Tests.git
+ git clone your_forked_repository_url.git
  ~~~
 3. Move terminal into the cloned files then rename example.env to .env
  ~~~
