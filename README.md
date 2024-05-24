@@ -1,15 +1,67 @@
 # Learning Automation with Selenium Python
 Mainly this project is to get an understanding of automation to improve my skillset as a QA Engineer
 
-## Goals
-* Choose a program/website that has dataset that wont be unintersting to me as a person to keep the project fun
-* Create a test case for a fundamental feature
-* Create small test suite of a couple different features
-* Gain an understanding of coding practices for automation, in this case using selenium python.
+## Summary
+In this project, I explore automation test case creation by first using a basicm but fundamental feature that will help enable learning the basics of selenium also. In this case I chose the login feature. By doing so I learn navigation and best practices for waiting and interacting with elements that have yet to be loaded. Ultimately, I want to create a test suite for more than one feature, so the design pattern of a [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models)(POM) was needed to write tests in a sustainable and scalable fashion. Hopefully when the POM is implemented, writing test cases/suites in pytest should become a simple matter.
 
-## Journey Overview
-First I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose https://tracker.gg/. Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. With this created [manual_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) (was login.py) which uses selenium at its core to navigate the website and login.
-* Some rodebumps, preserving our data privacy was solved by using [dotenv](https://github.com/theskumar/python-dotenv) and cloudflare was worked around using time.sleep()
+## Journey Overview WIP
+First I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose <https://tracker.gg/> which is a website that tracks performance across various competitive online games. Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. 
+<details>
+  <summary>Here's our first basic iteration of logging in with selenium with <a href="https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py"> manual_login.py</a></summary>
+  <br>
+  
+  
+  ```python
+  # Step 1 Navigate to tracker.gg
+## We can definitely just open the login page directly but I want to explore the navigation functionality of selenium
+print('Openning firefox on page tracker.gg')
+driver = webdriver.Firefox()
+driver.get('https://tracker.gg/')
+
+
+# Step 2 Select login and click on it
+print('Scanning for login element')
+element = driver.find_element(By.CSS_SELECTOR,'.trn-game-bar-auth')
+element.send_keys(Keys.RETURN)
+
+
+# Driver doesn't wait for page to load so need to learn how to wait until element appears
+# Step 3 Wait for page to load
+wait = WebDriverWait(driver, 15)
+print("Waiting for page to load")
+element = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input.trn-input:nth-child(1)")))
+
+
+# Step 4 Entering login data
+# Need to wait for cloudflare to finish loading before we can enter the information
+# Using sleep isn't best practice in terms of automation but cloudflare seems to be made to prevent bot purposes like this. As the following doesn't work
+#wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'success-circle')))
+print("Waiting for cloudflare to load")
+time.sleep(2)
+
+
+print('Entering Username and Password')
+element.send_keys(userName)
+element = driver.find_element(By.CSS_SELECTOR,'input.trn-input:nth-child(2)').send_keys(password,Keys.RETURN)
+
+# Step 5 Verify login was successful
+# Verify by checking user icon element
+# Note to self: maybe a more surefire way maybe would be to use cookies. 
+try:
+    element = wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'trn-game-bar-user')))
+    element = driver.find_element(By.CSS_SELECTOR, '.trn-game-bar-user__container')
+except TimeoutException:
+    print('Test failed due to timeout. Likely due to cloudflare')
+except NoSuchElementException:
+    print('Test Failed. User is not logged in')
+else:
+    print('Success! Signed in. Browser will now close in 5s')
+    time.sleep(5)
+    driver.quit()
+  ```
+</details>
+
+Some rodebumps, preserving our data privacy was solved by using [dotenv](https://github.com/theskumar/python-dotenv) and cloudflare was worked around using time.sleep()
 
 Writing more tests in a scaleable fashion required the implementation of a POM or [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models) which lead to the creation of the following:
 * [base_page.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/base_page.py) which should have some basic functions of navigating a webpage
@@ -23,6 +75,13 @@ Next, to make sure the POM implementation was working correctly, I incrementally
 
 
 Lastly is to write more tests for login and different features to and watch the POM scale
+
+# Conclusions
+# Next Steps
+- [ ] Write more test cases that attack the login feature differently.
+- [ ] Expand POM for another slightly more complicated feature that should also expand our understanding of Selenium. Likely considering Search
+
+
 # Installation to try the code
 ## Requirements / Prereqs
 * [Mozilla browser](https://www.mozilla.org/en-US/firefox/new/)
@@ -84,10 +143,9 @@ Documentation
 * https://selenium-python.readthedocs.io/
 * https://www.geeksforgeeks.org/selenium-python-introduction-and-installation/
 
-Youtube Tutorials
+Tutorials
+* https://www.colibri-software.com/2021/07/page-object-model-pom-in-selenium-using-python/
 * https://www.youtube.com/watch?v=P9ZWOWm7i0k
 * https://www.youtube.com/watch?v=0kHbK5iZkN0
 * https://www.youtube.com/watch?v=qBK5I_QApCg
-# Conclusions
-# Next Steps
 
