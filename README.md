@@ -76,11 +76,40 @@ else:
   ```
 </details>
 
-Some rodebumps, preserving our data privacy was solved by using [dotenv](https://github.com/theskumar/python-dotenv) and cloudflare was worked around using time.sleep()
+**After** the POM implementation and excluding some set up in pytest, the login test case looks like something more more succint and readable
+
+
+<details>
+  <summary>Check out the final product here in <a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py>test_login.py</a> or part of it in this dropdown</summary>
+  <br>
+  
+  ```python
+class Test_Login():
+
+    """Basic tests for login success"""
+    def test_login_02_success(self):
+        print('Test Login_02_success is starting')
+
+        print('Waiting for cloudflare to load')
+        time.sleep(2)
+
+        print('Entering Username and Password')
+        self.loginPage.input_username(userName)
+        self.loginPage.input_password(password)
+
+        print('Clicking on login')
+        self.loginPage.click_login()
+        assert self.loginPage.is_visible(LoginLocator.USER_ICON)
+        print('Verifying user is logged in')
+        print('Test Login_02_success completed')
+
+        
+  ```
+</details>
 
 ### POM Implementation
 Writing more tests in a scaleable fashion required the implementation of a POM or [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models). We only need to implement what's needed for our tests to function
-which lead to the creation of the following:
+which lead to the creation of the following files. *Note that the dropdown may not be as updated as the URL shown, but should atleast represent the elements necessary for that page.*
 <details>
   <summary>A <a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/base_page.py>base_page.py</a> that holds the basic functionality of the web page. All other pages should inherit from this class.</summary>
   <br>
@@ -116,7 +145,7 @@ which lead to the creation of the following:
   ```
 </details>
 
-Our locators are all *located* heh, in this file:
+Our locators which help us interact with the elements of the webpage are all *located* heh, in this file:
 <details>
   <summary><a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py>locators.py</a></summary>
   <br>
@@ -138,17 +167,43 @@ class HomePageLocators():
   ```
 </details>
 
-* And [login_page.py]() which encapsulates functions of the login page into methods. 
+With the locators encapsulated as class variables and some basic functionality. I finally encapsulate the basic things you would do in a login page into methods
+<br>
+
+<details>
+  <summary><a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py>login_page.py</a></summary>
+  <br>
+  
+  ```python
+
+from selenium.webdriver.common.by import By
+from POM.pages.locators import LoginPageLocators as Locator
+from POM.pages.base_page import BasePage
+
+class LoginPage(BasePage, Locator):
+
+    def __init__(self,driver):
+        super().__init__(driver)
+
+    """Inputs text into login textbox"""
+    def input_username(self,username):
+        self.driver.find_element(*Locator.USERNAME_TEXTBOX).send_keys(username)
+    
+    """Inputs text into login textbox"""
+    def input_password(self,password):
+        self.driver.find_element(*Locator.PASSWORD_TEXTBOX).send_keys(password)
+
+    """Clicks on login button"""
+    def click_login(self):
+        self.driver.find_element(*Locator.LOGIN_BUTTON).click()
+        
+  ```
+</details>
 
 
 
-Next, to make sure the POM implementation was working correctly, I incrementally replaced functions from [manual_login](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/manual_login.py) which lead to [login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/login.py) After verifying the POM implementation works,  we just needed to implement the testing in pytest.
-* Now for pytest we have the [conftest.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/conftest.py) which has the code to set up pre-reqs in testing and [test_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py) that will test everything related to login.
-
-
-Lastly is to write more tests for login and different features to and watch the POM scale
-
-### Pytest
+### Pytest WIP
+Now for pytest we have the [conftest.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/conftest.py) which has the code to set up pre-reqs in testing and [test_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py) that will test everything related to login.
 
 # Conclusions
 In hindsight, I liked the idea of having all the locators in one file/class but it might've been easier to put the locator variables into their respective classes as class variables. Definitely would be more read-able since it wouldn't need as much importing. I am imagining that when testing more features, it will be more readable to have all the locators in one file.
@@ -158,7 +213,7 @@ In hindsight, I liked the idea of having all the locators in one file/class but 
 - [ ] Expand POM for another slightly more complicated feature that should also expand our understanding of Selenium. Likely considering Search
 
 
-# Installation to try the code
+# Try this for yourself!
 ## Requirements / Prereqs
 * [Mozilla browser](https://www.mozilla.org/en-US/firefox/new/)
 * Download [Geckodriver](https://github.com/mozilla/geckodriver/releases) and note the path to Geckdriver
