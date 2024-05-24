@@ -78,7 +78,7 @@ pytest .\test_login.py
 - [ ] Write a few more variety of login tests
 - [ ] Explore search testing, likely need to expand POM
 
-## References
+# References
 Documentation
 * https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/
 * https://selenium-python.readthedocs.io/
@@ -88,6 +88,6 @@ Youtube Tutorials
 * https://www.youtube.com/watch?v=P9ZWOWm7i0k
 * https://www.youtube.com/watch?v=0kHbK5iZkN0
 * https://www.youtube.com/watch?v=qBK5I_QApCg
-## Conclusions
-## Next Steps
+# Conclusions
+# Next Steps
 
