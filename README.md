@@ -76,15 +76,23 @@ else:
   ```
 </details>
 
-**After** the POM implementation and excluding some set up in pytest, the login test case looks like something more more succint and readable
+**After** the POM implementation and excluding some set up in pytest, the login test case looks much more succint and readable.
 
 
 <details>
   <summary>Check out the final product here in <a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py>test_login.py</a> or part of it in this dropdown</summary>
   <br>
-  
+
+  There's some pytest magic in conftest.py file which sets up the browser, but aside from that, def test_login_02_success essentially does what our prior code does but in more readable and sustainable fashion
   ```python
 class Test_Login():
+
+    @pytest.fixture(autouse=True)
+    def setup(self, init_driver_inLogin):
+        self.driver = init_driver_inLogin
+        self.loginPage = LoginPage(self.driver)
+        print('Test Login Driver setup complete')
+
 
     """Basic tests for login success"""
     def test_login_02_success(self):
@@ -211,6 +219,7 @@ In hindsight, I liked the idea of having all the locators in one file/class but 
 ## Next Steps
 - [ ] Write more test cases that attack the login feature differently.
 - [ ] Expand POM for another slightly more complicated feature that should also expand our understanding of Selenium. Likely considering Search
+- [ ] Implement the tests for multiple browsers
 
 
 # Try this for yourself!
