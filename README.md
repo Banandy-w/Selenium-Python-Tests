@@ -83,7 +83,7 @@ else:
   <summary>Check out the final product here in <a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py>test_login.py</a> or part of it in this dropdown</summary>
   <br>
 
-  There's some pytest magic in conftest.py file which sets up the browser, but aside from that, def test_login_02_success essentially does what our prior code does but in more readable and sustainable fashion
+  There's some pytest magic in conftest.py file which sets up the browser, but aside from that, the method test_login_02_success essentially does what our prior code does.
   ```python
 class Test_Login():
 
