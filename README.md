@@ -1,4 +1,4 @@
-# Learning Automation with Selenium Python
+# Creating test suites with automation
 Mainly this project is to get an understanding of automation to improve my skillset as a QA Engineer
 
 ## Summary
