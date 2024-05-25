@@ -235,20 +235,20 @@ pip install pytest
 ~~~
  git clone your_forked_repository_url.git
  ~~~
-3. Move terminal into the cloned files then rename example.env to .env
+2. Move terminal into the cloned files then rename example.env to .env
  ~~~
  cd .\Selenium-Python-Tests\
  ~~~
  ~~~
  mv example.env .env
  ~~~
-4. In the .env file, change the values to the right of USER and PASSWORD into your account at https://tracker.gg/ with no spaces.
-5. In the .env file, change the value to FIREFOX_DRIVER_PATH= to the path of your Geckodriver installation location. E.G with quotes FIREFOX_DRIVER_PATH="C:\Projects\Selenium\geckdriver"
-6. Move Terminal to POM>tests folder
+3. In the .env file, change the values to the right of USER and PASSWORD into your account at https://tracker.gg/ with no spaces.
+4. In the .env file, change the value to FIREFOX_DRIVER_PATH= to the path of your Geckodriver installation location. E.G with quotes FIREFOX_DRIVER_PATH="C:\Projects\Selenium\geckdriver"
+5. Move Terminal to POM>tests folder
 ~~~
 cd .\POM\tests\
 ~~~
-7. Execute the tests by entering the following while terminal is in tests folder
+6. Execute the tests by entering the following while terminal is in tests folder
 ~~~
 pytest .\test_login.py
 ~~~
