@@ -153,7 +153,7 @@ which lead to the creation of the following files. *Note that the dropdown may n
   ```
 </details>
 
-Our locators which help us interact with the elements of the webpage are all *located* heh, in this file:
+Our locators which help us interact with the elements of the webpage are all *located* heh, in this file. Keeping all the locators in one place allows for us to adapt to any changes possibly done to the website by changing it here.
 <details>
   <summary><a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py>locators.py</a></summary>
   <br>
@@ -175,7 +175,7 @@ class HomePageLocators():
   ```
 </details>
 
-With the locators encapsulated as class variables and some basic functionality. I finally encapsulate the basic things you would do in a login page into methods
+With the locators encapsulated as class variables and some basic webpage functionality in base_page. I finally encapsulate the essence of what one would do in a login page into methods here:
 <br>
 
 <details>
