@@ -10,7 +10,7 @@ password = os.getenv('PASSWORD')
 
 class Test_Login():
 
-    #decorator helps deal with fixture errors
+    """Sets up webpage in login page based on conftest.py"""
     @pytest.fixture(autouse=True)
     def setup(self, init_driver_inLogin):
         self.driver = init_driver_inLogin
