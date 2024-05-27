@@ -1,4 +1,4 @@
-# Learning Automation with Selenium Python
+# Creating test suites with automation
 Mainly this project is to get an understanding of automation to improve my skillset as a QA Engineer
 
 ## Summary
@@ -76,15 +76,23 @@ else:
   ```
 </details>
 
-**After** the POM implementation and excluding some set up in pytest, the login test case looks like something more more succint and readable
+**After** the POM implementation and excluding some set up in pytest, the login test case looks much more succint and readable.
 
 
 <details>
   <summary>Check out the final product here in <a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py>test_login.py</a> or part of it in this dropdown</summary>
   <br>
-  
+
+  There's some pytest magic in conftest.py file which sets up the browser, but aside from that, the method test_login_02_success essentially does what our prior code does.
   ```python
 class Test_Login():
+
+    @pytest.fixture(autouse=True)
+    def setup(self, init_driver_inLogin):
+        self.driver = init_driver_inLogin
+        self.loginPage = LoginPage(self.driver)
+        print('Test Login Driver setup complete')
+
 
     """Basic tests for login success"""
     def test_login_02_success(self):
@@ -145,7 +153,7 @@ which lead to the creation of the following files. *Note that the dropdown may n
   ```
 </details>
 
-Our locators which help us interact with the elements of the webpage are all *located* heh, in this file:
+Our locators which help us interact with the elements of the webpage are all *located* heh, in this file. Keeping all the locators in one place allows for us to adapt to any changes possibly done to the website by changing it here.
 <details>
   <summary><a href=https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/pages/login_page.py>locators.py</a></summary>
   <br>
@@ -167,7 +175,7 @@ class HomePageLocators():
   ```
 </details>
 
-With the locators encapsulated as class variables and some basic functionality. I finally encapsulate the basic things you would do in a login page into methods
+With the locators encapsulated as class variables and some basic webpage functionality in base_page. I finally encapsulate the essence of what one would do in a login page into methods here:
 <br>
 
 <details>
@@ -205,12 +213,13 @@ class LoginPage(BasePage, Locator):
 ### Pytest WIP
 Now for pytest we have the [conftest.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/conftest.py) which has the code to set up pre-reqs in testing and [test_login.py](https://github.com/Banandy-w/Selenium-Python-Tests/blob/main/POM/tests/test_login.py) that will test everything related to login.
 
-# Conclusions
+## Conclusions WIP
 In hindsight, I liked the idea of having all the locators in one file/class but it might've been easier to put the locator variables into their respective classes as class variables. Definitely would be more read-able since it wouldn't need as much importing. I am imagining that when testing more features, it will be more readable to have all the locators in one file.
 
-# Next Steps
+## Next Steps
 - [ ] Write more test cases that attack the login feature differently.
 - [ ] Expand POM for another slightly more complicated feature that should also expand our understanding of Selenium. Likely considering Search
+- [ ] Implement the tests for multiple browsers
 
 
 # Try this for yourself!
@@ -235,38 +244,23 @@ pip install pytest
 ~~~
  git clone your_forked_repository_url.git
  ~~~
-3. Move terminal into the cloned files then rename example.env to .env
+2. Move terminal into the cloned files then rename example.env to .env
  ~~~
  cd .\Selenium-Python-Tests\
  ~~~
  ~~~
  mv example.env .env
  ~~~
-4. In the .env file, change the values to the right of USER and PASSWORD into your account at https://tracker.gg/ with no spaces.
-5. In the .env file, change the value to FIREFOX_DRIVER_PATH= to the path of your Geckodriver installation location. E.G with quotes FIREFOX_DRIVER_PATH="C:\Projects\Selenium\geckdriver"
-6. Move Terminal to POM>tests folder
+3. In the .env file, change the values to the right of USER and PASSWORD into your account at https://tracker.gg/ with no spaces.
+4. In the .env file, change the value to FIREFOX_DRIVER_PATH= to the path of your Geckodriver installation location. E.G with quotes FIREFOX_DRIVER_PATH="C:\Projects\Selenium\geckdriver"
+5. Move Terminal to POM>tests folder
 ~~~
 cd .\POM\tests\
 ~~~
-7. Execute the tests by entering the following while terminal is in tests folder
+6. Execute the tests by entering the following while terminal is in tests folder
 ~~~
 pytest .\test_login.py
 ~~~
-
-## Timeline / Roadmap
-- [x] Code a script using Selenium to test a random website. Tracker.gg was chosen and the function to script is login.
-- [x] Figuring out the basics and installation of Selenium
-- [x] Cloudflare prevents scripts to an extent. I used time.sleep() to work around this but this is likely not best practice, but the workaround is beyond the scope/purpose of this project.
-- [x] A way needed to hide credentials from github and store it locally was needed. Implemented [dotenv](https://github.com/theskumar/python-dotenv)
-- [x] Script that logs user into to tracker.gg from home page to sign in is complete.
-- [x] Code doesn't look scaleable so I need a better model. Introducing the Page Object Model (POM), I started implementing login_page.py as a starter
-- [x] Implement a POM for a class file of locators
-- [x] Implement a POM for a class file of homepage and page functions
-- [ ] Implement a POM for get set elements
-- [x] Implement pytest
-- [x] Rewrite login.py as a test_login.py which will use pytest and POM framework to write cleaner readable test case
-- [ ] Write a few more variety of login tests
-- [ ] Explore search testing, likely need to expand POM
 
 # References
 Documentation
