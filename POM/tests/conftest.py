@@ -10,7 +10,7 @@ load_dotenv()
 FIREFOX_DRIVER_PATH = os.getenv('FIREFOX_DRIVER_PATH')
 
 """Starts web browser"""
-@pytest.fixture(scope='class')
+@pytest.fixture(scope='function')
 def init_driver():
     service = FirefoxService(executable_path=FIREFOX_DRIVER_PATH)
 
@@ -26,7 +26,7 @@ def init_driver():
     print("Webpage is closed")
 
 """Brings user to sign in page. We could also store the sign in page in a URL and direclty open it instead of clicking it"""
-@pytest.fixture(scope='class')
+@pytest.fixture(scope='function')
 def init_driver_inLogin(init_driver):
     driver = init_driver
     login_page = LoginPage(driver)
