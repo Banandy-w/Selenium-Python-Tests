@@ -2,9 +2,9 @@
 Mainly this project is to get an understanding of automation to improve my skillset as a QA Engineer
 
 ## Summary
-In this project, I explore automation test case creation by first using a basicm but fundamental feature that will help enable learning the basics of selenium also. In this case I chose the login feature. By doing so I learn navigation and best practices for waiting and interacting with elements that have yet to be loaded. Ultimately, I want to create a test suite for more than one feature, so the design pattern of a [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models)(POM) was needed to write tests in a sustainable and scalable fashion. Hopefully when the POM is implemented, writing test cases/suites in pytest should become a simple matter.
+In this project, I explore automation test case creation by first using a basicm but fundamental feature that will help enable learning the basics of selenium also. In this case I chose the login feature. By doing so I learn navigation and best practices for waiting and interacting with elements that have yet to be loaded. Ultimately, I want to create a test suite for more than one feature, so the design pattern of a [page object model](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models)(POM) was needed to write tests in a sustainable and scalable fashion. After the POM is implemented, we utilize pytest to streamline the test results.
 
-## Journey Overview WIP
+## Journey Overview
 
 I needed a functioning product with data that interests me. Naturally gravitated towards gaming so I chose <https://tracker.gg/> which is a website that tracks performance across various competitive online games. Second, test a feature that every user would probalby use but isn't too complicated to get our feet wet with automation. I decided login with navigation instead of directly openning to the login page. 
 <details>
