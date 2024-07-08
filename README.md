@@ -240,10 +240,7 @@ https://github.com/theskumar/python-dotenv
 pip install pytest
 ~~~
 ## Setting up and trying the code
-1. Get the files
-~~~
- git clone your_forked_repository_url.git
- ~~~
+1. Fork the files
 2. Move terminal into the cloned files then rename example.env to .env
  ~~~
  cd .\Selenium-Python-Tests\
