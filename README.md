@@ -249,12 +249,11 @@ pip install pytest
  mv example.env .env
  ~~~
 3. In the .env file, change the values to the right of USER and PASSWORD into your account at https://tracker.gg/ with no spaces.
-4. In the .env file, change the value to FIREFOX_DRIVER_PATH= to the path of your Geckodriver installation location. E.G with quotes FIREFOX_DRIVER_PATH="C:\Projects\Selenium\geckdriver"
-5. Move Terminal to POM>tests folder
+4. Move Terminal to POM>tests folder
 ~~~
 cd .\POM\tests\
 ~~~
-6. Execute the tests by entering the following while terminal is in tests folder
+5. Execute the tests by entering the following while terminal is in tests folder
 ~~~
 pytest .\test_login.py
 ~~~
